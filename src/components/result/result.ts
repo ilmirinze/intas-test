@@ -4,16 +4,19 @@ import { saveData, getData } from '../../main';
 import { testContent } from '../testContent/testContent';
 
 export const result = (testnumber: number) => {
-    document.addEventListener('click', (event: MouseEvent) => {
-        if ((event.target as HTMLElement).classList.contains('result__button-element')) {
-            const openTest = document.querySelector<HTMLDivElement>('#app')!;
-            openTest.innerHTML = testContent(testnumber);
-            const doneArray = JSON.parse(getData('doneArray'))
-            doneArray[testnumber] = false
-            saveData('doneArray', JSON.stringify(doneArray))
-        }
-    });
-    
+    const test = document.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
+    if (test) {
+        test.addEventListener('click', (event: MouseEvent) => {
+            if ((event.target as HTMLElement).classList.contains('result__button-element')) {
+                test.innerHTML = testContent(testnumber);
+                const doneArray = JSON.parse(getData('doneArray'))
+                doneArray[testnumber] = false
+                saveData('doneArray', JSON.stringify(doneArray))
+            }
+        });
+    }
+
+
     saveData('currentPage', 'result')
     const getTime = getData(`timer${testnumber}`)
 
@@ -21,7 +24,7 @@ export const result = (testnumber: number) => {
         const minutes = Math.floor(remainingTime / 60000);
         const seconds = Math.floor((remainingTime % 60000) / 1000);
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    };
+    };    
     let selectedAnswers = JSON.parse(getData(`selectedAnswers${testnumber}`))
     let selectedAnswersCount = 0
     for (let i = 0; i < selectedAnswers.length; i++) {

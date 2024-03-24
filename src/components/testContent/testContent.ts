@@ -40,9 +40,10 @@ export const testContent = (testnumber: number): string => {
         const remainingTime = getRemainingTime();
         saveData(`timer${testnumber}`, remainingTime);
         saveData(`selectedAnswers${testnumber}`, JSON.stringify(selectedAnswers))
-        const openResult = document.querySelector<HTMLDivElement>('#app')!;
+        const openResult = document.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
         openResult.innerHTML = result(testnumber);
     };
+    const test = document.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
 
     const startTimer = (): void => {
         const duration = 5 * 60 * 1000;
@@ -57,7 +58,7 @@ export const testContent = (testnumber: number): string => {
             } else {
                 const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-                const timerElement = document.querySelector('.testContent__header-info-timer');
+                const timerElement = test.querySelector('.testContent__header-info-timer');
                 if (timerElement) {
                     timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
                 }
@@ -66,47 +67,50 @@ export const testContent = (testnumber: number): string => {
         }, 500);
     };
 
-    document.addEventListener('click', (event: MouseEvent) => {
+
+
+    test.addEventListener('click', (event: MouseEvent) => {
         if ((event.target as HTMLElement).classList.contains('testContent__header-info-reset')) {
             resetAnswers();
             selectedAnswers = [null, null, null, null, null];
         }
     });
 
-    document.addEventListener('change', (event: Event) => {
+    test.addEventListener('change', (event: Event) => {
         const target = event.target as HTMLInputElement;
         if (target.type === 'radio') {
             updateAnswerCount();
         }
     });
 
-    document.addEventListener('click', (event: MouseEvent) => {
+    test.addEventListener('click', (event: MouseEvent) => {
         if ((event.target as HTMLElement).classList.contains('testContent__header-info-reset')) {
             resetAnswers();
         }
     });
 
-    document.addEventListener('click', (event: MouseEvent) => {
+    test.addEventListener('click', (event: MouseEvent) => {
         if ((event.target as HTMLElement).classList.contains('testContent__header-exit')) {
             const modal = document.querySelector<HTMLDivElement>('.modal')!;
             modal.style.display = 'block'
         }
     });
 
-    document.addEventListener('click', (event: MouseEvent) => {
+    test.addEventListener('click', (event: MouseEvent) => {
         if ((event.target as HTMLElement).classList.contains('testContent__button-element')) {
             const remainingTime = getRemainingTime();
             saveData(`timer${testnumber}`, remainingTime);
             saveData(`selectedAnswers${testnumber}`, JSON.stringify(selectedAnswers))
-            const openResult = document.querySelector<HTMLDivElement>('#app')!;
+            const openResult = document.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
             openResult.innerHTML = result(testnumber);
             const doneArray = JSON.parse(getData('doneArray'))
             doneArray[testnumber] = true
+            clearInterval(timerInterval)
             saveData('doneArray', JSON.stringify(doneArray))
         }
     });
 
-    document.addEventListener('change', (event: Event) => {
+    test.addEventListener('change', (event: Event) => {
         const target = event.target as HTMLInputElement;
         if (target && target.type === 'radio') {
             const nameAttribute = target.getAttribute('name');

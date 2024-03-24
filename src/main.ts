@@ -21,11 +21,13 @@ if (!getData('doneArray')) {
     saveData('doneArray', JSON.stringify([false, false, false, false]))
 }
 
-const currentLi = getData('activeLi'); 
+const currentLi = getData('activeLi');
 const currentPage = getData(`currentPage`);
 
 if (currentPage) {
-    const displayCurrentPage = document.querySelector<HTMLDivElement>('#app')!;
+    let app = document.querySelector<HTMLDivElement>('#app')!;
+    app.innerHTML = `<div id='test${currentLi}'></div>`
+    const displayCurrentPage = document.querySelector<HTMLDivElement>(`#test${currentLi}`)!;
     if (currentPage === 'testContent') {
         displayCurrentPage.innerHTML = testContent(currentLi);
         addClassLiActive()

@@ -14,30 +14,32 @@ waitForElm(".navbar__menu").then((elm: any) => {
             if (!elm.children[i].className.includes('navbar__menu-active')) {
                 removeClassLiActive()
                 testnumber = i
-                let description = document.querySelector<HTMLDivElement>('#app')!;
+                let app = document.querySelector<HTMLDivElement>('#app')!;
+                app.innerHTML = `<div id='test${testnumber}'></div>`
+                let test = app.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
                 const checkDone = JSON.parse(getData('doneArray'))
                 elm.children[i].classList.add('navbar__menu-active');
                 saveData('activeLi', i.toString())
                 if (checkDone[i] === true) {
-                    description.innerHTML = result(testnumber)
+                    test.innerHTML = result(testnumber)
                 }
                 else {
                     removeData('currentPage')
-                    description.innerHTML = `
-                    <div class = "description">` + `
-                        <div class="description__header">
-                            <div class="description__header-text">Описание</div>
+                    test.innerHTML = `
+                        <div class = "description">` + `
+                            <div class="description__header">
+                                <div class="description__header-text">Описание</div>
+                            </div>
+                            ` + `<div class = "description-text">` + questions_list[i].description + `</div> 
+                            <div class="description__buttons"> 
+                                <button class="description__buttons-start">Начать</button>
+                                <button class="description__buttons-cancel">Отмена</button>
+                            </div> 
                         </div>
-                        ` + `<div class = "description-text">` + questions_list[i].description + `</div> 
-                        <div class="description__buttons"> 
-                            <button class="description__buttons-start">Начать</button>
-                            <button class="description__buttons-cancel">Отмена</button>
-                        </div> 
-                    </div>`
+                    `
                     const startButton = document.querySelector<HTMLDivElement>('.description__buttons-start')!;
                     startButton.addEventListener('click', function () {
-                        const description = document.querySelector<HTMLDivElement>('#app')!;
-                        description.innerHTML = testContent(testnumber)
+                        test.innerHTML = testContent(testnumber)
                         saveData(testnumber.toString(), true)
                     })
                     const cancelButton = document.querySelector<HTMLDivElement>('.description__buttons-cancel')!;
