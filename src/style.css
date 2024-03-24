@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    margin: 0; 
+}
+
+#content {
+    display: flex;
+    margin: 0; 
+}
+
+#app {
+    width: 100%;
+}

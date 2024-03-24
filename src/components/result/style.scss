@@ -1,0 +1,136 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  
+  &__header {
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    height: 58px;
+    border-bottom: 1px solid #cfd8dc;
+    justify-content: space-between;
+
+    &-exit {
+      width: 200px;
+      font-family: Nunito;
+      color: #cfcfcf;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    &-text {
+      width: 200px;
+      font-family: Nunito;
+      font-weight: 700;
+      color: #263238;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    &-info {
+      width: 200px;
+      display: flex;
+      gap: 8px;
+      font-family: Nunito;
+      color: #cfcfcf;
+      font-size: 12px;
+
+      &-answers {
+        border-left: 1px solid #cfcfcf;
+        border-right: 1px solid #cfcfcf;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+    }
+  }
+
+  &__content {
+    &-header {
+      &-end {
+        font-family: Nunito;
+        font-size: 24px;
+        line-height: 48px;
+        text-align: center;
+        color: #263238;
+      }
+
+      &-count {
+        font-family: Nunito;
+        font-size: 13px;
+        line-height: 16px;
+        text-align: center;
+        color: #8d8d8d;
+      }
+    }
+
+    &-answers {
+      padding-left: 30px;
+      &-header {
+        font-family: Nunito;
+        font-size: 16px;
+        line-height: 16px;
+        color: #8d8d8d;
+        margin-bottom: 30px;
+      }
+
+      &-info {
+        &-element {
+          border: 0;
+          border-bottom: 2px solid #e0e0e0;
+          border-style: dashed;
+          padding-bottom: 20px;
+          &-question {
+            margin-top: 8px;
+            font-family: Nunito;
+            font-size: 16px;
+            line-height: 24px;
+            color: #263238;
+          }
+
+          &-your {
+            margin-left: 20px;
+            margin-top: 10px;
+            font-family: Nunito;
+            font-size: 13px;
+            line-height: 16px;
+            color: #263238;
+          }
+
+          &-right {
+            margin-left: 20px;
+            margin-top: 8px;
+            font-family: Nunito;
+            font-size: 14px;
+            line-height: 16px;
+            margin-bottom: 8px;
+            color: #263238;
+          }
+        }
+      }
+    }
+  }
+  &__button {
+    width: 100%;
+    border-top: 1px solid #cfd8dc;
+    bottom: 0;
+
+    &-element {
+      justify-content: flex-end;
+      margin: 15px 0 15px 30px;
+      width: 150px;
+      height: 32px;
+      border-radius: 3px;
+      border: 1px solid #d32f2f;
+      background-color: #fff;
+      color: #d32f2f;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #dadada;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.startscreen {
+  height: 100%;
+  display: flex;
+  margin: auto;
+
+  &__text {
+    display: flex;
+    margin: auto;
+    color: #34515e;
+    font-family: Nunito;
+  }
+}
