@@ -7,6 +7,7 @@ export const testContent = (testnumber: number): string => {
     let selectedAnswers: number[] | null[] = [null, null, null, null, null];
     let timerInterval: number;
     let startTime: number;
+    const duration = 5 * 60 * 1000;
     saveData('currentPage', 'testContent')
     const resetAnswers = (): void => {
         questions_list[testnumber].questions.forEach(question => {
@@ -37,8 +38,8 @@ export const testContent = (testnumber: number): string => {
 
 
     const handleTimeUp = (): void => {
-        const remainingTime = getRemainingTime();
-        saveData(`timer${testnumber}`, remainingTime);
+        clearInterval(timerInterval)
+        saveData(`timer${testnumber}`, 0);
         saveData(`selectedAnswers${testnumber}`, JSON.stringify(selectedAnswers))
         const openResult = document.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
         openResult.innerHTML = result(testnumber);
@@ -46,7 +47,7 @@ export const testContent = (testnumber: number): string => {
     const test = document.querySelector<HTMLDivElement>(`#test${testnumber}`)!;
 
     const startTimer = (): void => {
-        const duration = 5 * 60 * 1000;
+        
         startTime = Date.now();
         timerInterval = setInterval(() => {
             const elapsedTime = Date.now() - startTime;
@@ -123,7 +124,6 @@ export const testContent = (testnumber: number): string => {
     });
 
     const getRemainingTime = (): number => {
-        const duration = 5 * 60 * 1000;
         const elapsedTime = Date.now() - startTime;
         const remainingTime = duration - elapsedTime;
         return remainingTime;
